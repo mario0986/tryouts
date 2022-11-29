@@ -1,6 +1,15 @@
 # tryouts
 Tryouts Of Proof of Concepts
 
-## json web token
+## Json Web Token
+
+### Instalation
 - `pip3 install`
+
+### Outcomes
+- Request: `GET https://storage.googleapis.com/mario-test/mario.json`
+- Response: `AuthenticationRequired`
+
+
+
 
