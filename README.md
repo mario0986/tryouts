@@ -6,7 +6,7 @@ Tryouts Of Proof of Concepts
 ### Instalation
 - `pip install PyJWT`
 
-### Reference
+### References
 - https://developers.google.com/identity/protocols/oauth2/service-account#python_2
 - https://github.com/jpadilla/pyjwt/
 - https://github.com/googleapis/googleapis
