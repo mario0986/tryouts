@@ -8,7 +8,7 @@ Tryouts Of Proof of Concepts
 
 ### Outcomes
 - Code:     `auth2/json_web_token.py`
-- Request: `GET https://storage.googleapis.com/mario-test/mario.json`
+- Request: `GET https://storage.googleapis.com/mario-test/mario.json` (On my personal gmail account)
 - Response: `AuthenticationRequired`
 
 
