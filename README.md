@@ -3,9 +3,6 @@ Tryouts Of Proof of Concepts
 
 ## Json Web Token
 
-### Instalation
-- `pip install PyJWT`
-
 ### References
 - https://developers.google.com/identity/protocols/oauth2/service-account#python_2
 - https://github.com/jpadilla/pyjwt/
@@ -19,6 +16,13 @@ Generate a token using the `json_web_token.py` based on the `Service Account Key
 - Request: `GET https://storage.googleapis.com/mario-test/mario.json` (On my personal gmail account)
 - Response: `AuthenticationRequired`
 
+## Google Auth Library
 
+### References
+- https://googleapis.github.io/google-api-python-client/docs/oauth.html 
+- https://google-auth.readthedocs.io/en/latest/reference/google.oauth2.service_account.html#google.oauth2.service_account.Credentials
+- https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.html
 
+### Outcomes
+Generate a signed url with access to the cloud storage
 

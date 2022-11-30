@@ -23,6 +23,7 @@
 
 import time 
 iat = time.time()
+# pip install PyJWT
 import jwt
 import json 
 
