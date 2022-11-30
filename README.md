@@ -25,4 +25,7 @@ Generate a token using the `json_web_token.py` based on the `Service Account Key
 
 ### Outcomes
 Generate a signed url with access to the cloud storage
+Limitation: Signatures cannot be used to authenticate an upload if the upload uses chunked transfer encoding. Use OAuth 2.0 tokens if you want to use chunked transfer encoding in your uploads.
+
+
 
