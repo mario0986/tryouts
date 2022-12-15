@@ -11,12 +11,17 @@ from google.oauth2 import service_account
 import six
 from six.moves.urllib.parse import quote
 
-def generate_signed_url(bucket_name, object_name,
-                        subresource=None, expiration=604800, http_method='GET',
-                        query_parameters=None, headers=None):    
-    if expiration > 604800:
+HTTP_METHOD='PUT'
+EXPIRATION=604800
+BUCKET_NAME='mario-test'
+
+def signed_url(object_name):
+    if EXPIRATION > 604800:
         print('Expiration Time can\'t be longer than 604800 seconds (7 days).')
         sys.exit(1)
+    
+    # object_name = request.args.get('file')
+    
 
     escaped_object_name = quote(six.ensure_binary(object_name), safe=b'/~')
     canonical_uri = '/{}'.format(escaped_object_name)
@@ -24,7 +29,7 @@ def generate_signed_url(bucket_name, object_name,
     datetime_now = datetime.datetime.now(tz=datetime.timezone.utc)
     request_timestamp = datetime_now.strftime('%Y%m%dT%H%M%SZ')
     datestamp = datetime_now.strftime('%Y%m%d')    
-    ## Try this
+
     service_account_info = json.load(open('service_accounts_keys.json'))
     google_credentials = service_account.Credentials.from_service_account_info(
     service_account_info)
@@ -32,9 +37,9 @@ def generate_signed_url(bucket_name, object_name,
     client_email = google_credentials.service_account_email    
     credential_scope = '{}/auto/storage/goog4_request'.format(datestamp)
     credential = '{}/{}'.format(client_email, credential_scope)    
-    if headers is None:
-        headers = dict()
-    host = '{}.storage.googleapis.com'.format(bucket_name)
+   
+    headers = dict()
+    host = '{}.storage.googleapis.com'.format(BUCKET_NAME)
     headers['host'] = host
 
     canonical_headers = ''
@@ -50,15 +55,12 @@ def generate_signed_url(bucket_name, object_name,
         signed_headers += '{};'.format(lower_k)
     signed_headers = signed_headers[:-1]  # remove trailing ';'
 
-    if query_parameters is None:
-        query_parameters = dict()
+    query_parameters = dict()
     query_parameters['X-Goog-Algorithm'] = 'GOOG4-RSA-SHA256'
     query_parameters['X-Goog-Credential'] = credential
     query_parameters['X-Goog-Date'] = request_timestamp
-    query_parameters['X-Goog-Expires'] = expiration
+    query_parameters['X-Goog-Expires'] = EXPIRATION
     query_parameters['X-Goog-SignedHeaders'] = signed_headers
-    if subresource:
-        query_parameters[subresource] = ''
 
     canonical_query_string = ''
     ordered_query_parameters = collections.OrderedDict(
@@ -69,7 +71,7 @@ def generate_signed_url(bucket_name, object_name,
         canonical_query_string += '{}={}&'.format(encoded_k, encoded_v)
     canonical_query_string = canonical_query_string[:-1]  # remove trailing '&'
 
-    canonical_request = '\n'.join([http_method,
+    canonical_request = '\n'.join([HTTP_METHOD,
                                    canonical_uri,
                                    canonical_query_string,
                                    canonical_headers,
@@ -96,4 +98,4 @@ def generate_signed_url(bucket_name, object_name,
     return signed_url
 
 
-generate_signed_url("mario-test","mario.json")
+signed_url("mario.json")
