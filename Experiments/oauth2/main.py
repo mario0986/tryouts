@@ -1,3 +1,5 @@
+# Create Authorization Request
+
 # Based on this documentation
 # https://developers.google.com/identity/protocols/oauth2/service-account#python_2 section Addendum
 # Authorized Calls Using JWT Token
@@ -21,15 +23,17 @@
 #   "exp": 1511903600
 # }
 
+# Article this code is based on https://developers.google.com/identity/protocols/oauth2
+# https://developers.google.com/identity/protocols/oauth2/service-account
+# https://developers.google.com/identity/protocols/oauth2/service-account#python_2 
+
 import time 
 iat = time.time()
-# pip install PyJWT
 import jwt
 import json 
 
 token_file = open('service_accounts_keys.json')
 token_data = json.load(token_file)
-
 
 exp = iat + 3600
 
@@ -45,5 +49,4 @@ signed_jwt = jwt.encode(payload,
                         headers=additional_headers,
                         algorithm='RS256')
 print("\nSignedJWY\n",signed_jwt)
-
 
