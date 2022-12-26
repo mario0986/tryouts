@@ -31,3 +31,4 @@ override.tf.json
 
 # Folder with packages installed
 lib
+Experiments/.terraform.lock.hcl
