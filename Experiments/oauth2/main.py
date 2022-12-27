@@ -115,7 +115,7 @@ def putFileIntoCloudStorage(access_token):
     file_name = open("draft.json")
     headers = {"Content-type": "multipart/form-data"}
 
-    r = requests.put(url, headers = headers, auth=BearerAuth(access_token), data=file_name)
+    requests.put(url, headers = headers, auth=BearerAuth(access_token), data=file_name)
 
 
 if __name__ == "__main__":
