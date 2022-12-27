@@ -112,10 +112,10 @@ def putFileIntoCloudStorage(access_token):
 
     url = "https://storage.googleapis.com/mario-test/draft.json"
 
-    fileName = open("draft.json")
+    file_name = open("draft.json")
     headers = {"Content-type": "multipart/form-data"}
 
-    r = requests.put(url, auth=BearerAuth(access_token), data=fileName)
+    r = requests.put(url, headers = headers, auth=BearerAuth(access_token), data=file_name)
 
 
 if __name__ == "__main__":
