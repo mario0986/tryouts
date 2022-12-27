@@ -19,12 +19,15 @@ scopes = "https://www.googleapis.com/auth/devstorage.read_write"
 # Set how long this token will be valid in seconds
 expires_in = 3600  # Expires in 1 hour
 
+
 class BearerAuth(requests.auth.AuthBase):
     def __init__(self, token):
         self.token = token
+
     def __call__(self, r):
         r.headers["authorization"] = "Bearer " + self.token
         return r
+
 
 def load_json_credentials(filename):
     """Load the Google Service Account Credentials from Json file"""
@@ -112,7 +115,7 @@ def putFileIntoCloudStorage(access_token):
     fileName = open("draft.json")
     headers = {"Content-type": "multipart/form-data"}
 
-    r = requests.put(url, auth = BearerAuth(access_token), data = fileName)
+    r = requests.put(url, auth=BearerAuth(access_token), data=fileName)
 
 
 if __name__ == "__main__":
@@ -125,7 +128,7 @@ if __name__ == "__main__":
     )
 
     token, err = exchangeJwtForAccessToken(s_jwt)
-    
+
     putFileIntoCloudStorage(token)
 
     if token is None:
