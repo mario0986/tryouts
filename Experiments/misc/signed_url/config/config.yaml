@@ -1,0 +1,32 @@
+swagger: '2.0'
+info:
+  title: API_ID optional-string
+  description: Sample API on API Gateway with a Google Cloud Functions backend
+  version: 2.0.0
+host: ods-api-gateway-default-123ub30ub8scp.apigateway.evalproject-378013.cloud.goog
+schemes:
+  - https
+securityDefinitions:
+    # This section configures basic authentication with an API key.
+  apiKey:
+    type: apiKey
+    name: x-api-key
+    in: header
+produces:
+  - application/json
+paths:
+  /api:
+    get:
+      summary: Get a Api url
+      operationId: api
+      x-google-backend:
+        # TODO: GCP_REGION-PROJECT_ID to be changed after build of cloud function
+        # address: "https://hello-rc27gmuyeq-uc.a.run.app"
+        address: "https://hello-rc27gmuyeq-uc.a.run.app"
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
