@@ -22,7 +22,7 @@ paths:
       x-google-backend:
         # TODO: GCP_REGION-PROJECT_ID to be changed after build of cloud function
         # address: "https://hello-rc27gmuyeq-uc.a.run.app"
-        address: "https://hello-rc27gmuyeq-uc.a.run.app"
+        address: ${{ secrets.CLOUD_RUN }}
       security:
       - apiKey: []
       responses:
